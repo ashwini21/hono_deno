@@ -1,0 +1,31 @@
+{
+  "imports": {
+    "hono": "jsr:@hono/hono@^4.6.17"
+  },
+  "tasks": {
+    "start": "deno run --allow-net main.ts"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "hono/jsx"
+  },
+  "lint": {
+    "rules": {
+      "include": ["src/**/*.ts"],
+      "exclude": ["tests/**/*"]
+    }
+  },
+  "fmt": {
+    "files": {
+      "include": ["src/**/*.ts"],
+      "exclude": ["tests/**/*"]
+    },
+    "options": {
+      "useTabs": false,
+      "lineWidth": 80,
+      "indentWidth": 2,
+      "singleQuote": true,
+      "proseWrap": "always"
+    }
+  }
+}
