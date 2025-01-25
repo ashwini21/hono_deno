@@ -1,7 +1,7 @@
 import { CONSTANTS } from './helpers/constant.ts';
 
 export const internalServerErrorResponse = (err, c) => {
-  console.error(`Error occurred on ${c.req.method} ${c.req.url}:`, err.stack);
+  console.error(`Error occurredddd on ${c.req.method} ${c.req.url}:`, err.stack);
   return c.json({
     status: CONSTANTS.STATUS_NAMES.INTERNAL_SERVER_ERROR,
     statusCode: CONSTANTS.STATUS_CODES.INTERNAL_SERVER_ERROR,
@@ -21,6 +21,7 @@ export const badRequestResponse = (
 };
 
 export const notFoundResponse = (err = CONSTANTS.STATUS_NAMES.NOT_FOUND, c) => {
+  console.log("hhh",c)
   return c.json({
     status: CONSTANTS.STATUS_NAMES.NOT_FOUND,
     statusCode: CONSTANTS.STATUS_CODES.NOT_FOUND,
