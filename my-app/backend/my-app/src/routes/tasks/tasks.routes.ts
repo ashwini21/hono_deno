@@ -1,7 +1,7 @@
 import { createRoute, z } from 'https://esm.sh/@hono/zod-openapi@latest';
 import { openAPIJsonContent, jsonContentRequired } from "../../utils/commonFunction.ts";
 import { CONSTANTS } from '../../utils/helpers/constant.ts'
-
+import { taskInsertSchema,taskSelectSchema } from '../../database/schema/task-schema.ts';
 const tags = ["Tasks"];
 
 export const listTask = createRoute({
@@ -24,19 +24,19 @@ export const listTask = createRoute({
   });
 
   export const createTask = createRoute({
-    tags,
     path: "/create-task",
     method: "post",
+    tags,
     request: {
         body: jsonContentRequired(taskInsertSchema, "Create Task")
     },
     responses: {
         200: openAPIJsonContent(
-            TaskSelectSchema,
+            taskSelectSchema,
             "list of tasks"
         )
     }
 })
 
-  export type ListRoute = typeof listTask;
+  export type ListTaskRoute = typeof listTask;
   export type CreateTask = typeof createTask

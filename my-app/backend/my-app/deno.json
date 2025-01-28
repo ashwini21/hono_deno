@@ -6,6 +6,7 @@
     "drizzle-orm": "npm:drizzle-orm@^0.38.4",
     "drizzle-zod": "npm:drizzle-zod@0.5.1",
     "pg": "npm:pg@^8.13.1",
+    "scalar":"npm:@scalar/hono-api-reference"
   },
   "tasks": {
     "start": "deno run --allow-net main.ts"
