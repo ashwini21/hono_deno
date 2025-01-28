@@ -11,7 +11,7 @@ export const CONSTANTS = {
     NOT_FOUND: 404,
     REQUEST_TIMEOUT: 408,
     CONFLICT: 409,
-    LENGTH_REQUIRED: 411,
+    LENGTH_REQUIRED: 411,  //
     INTERNAL_SERVER_ERROR: 500,
     NOT_IMPLEMENTED: 501,
     SERVICE_UNAVAILABLE: 503,
@@ -29,4 +29,7 @@ export const CONSTANTS = {
     INTERNAL_SERVER_ERROR: 'Internal Server Error',
     SUCCESS:'Success!'
   },
+  ERROR: {
+    NOT_FOUND_ERROR_MESSAGE:'The requested URL was not found on this server.'
+  }
 };

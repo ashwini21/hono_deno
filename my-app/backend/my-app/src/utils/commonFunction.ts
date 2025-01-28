@@ -1,7 +1,9 @@
 import { CONSTANTS } from './helpers/constant.ts';
+import { z } from 'https://esm.sh/@hono/zod-openapi@latest';
+//define openapi json content format
+type ZodSchema = z.ZodUnion | z.AnyZodObject | z.ZodArray<z.AnyZodObject>;
 
-export const internalServerErrorResponse = (err, c) => {
-  console.error(`Error occurredddd on ${c.req.method} ${c.req.url}:`, err.stack);
+export const internalServerErrorResponse = (c,err) => {
   return c.json({
     status: CONSTANTS.STATUS_NAMES.INTERNAL_SERVER_ERROR,
     statusCode: CONSTANTS.STATUS_CODES.INTERNAL_SERVER_ERROR,
@@ -9,9 +11,8 @@ export const internalServerErrorResponse = (err, c) => {
   });
 };
 
-export const badRequestResponse = (
-  err = CONSTANTS.STATUS_NAMES.BAD_REQUEST,
-  c,
+export const badRequestResponse = (c,
+  err = CONSTANTS.STATUS_NAMES.BAD_REQUEST
 ) => {
   return c.json({
     status: CONSTANTS.STATUS_NAMES.BAD_REQUEST,
@@ -20,12 +21,11 @@ export const badRequestResponse = (
   });
 };
 
-export const notFoundResponse = (err = CONSTANTS.STATUS_NAMES.NOT_FOUND, c) => {
-  console.log("hhh",c)
+export const notFoundResponse = (c,err=CONSTANTS.ERROR.NOT_FOUND_ERROR_MESSAGE) => {
   return c.json({
     status: CONSTANTS.STATUS_NAMES.NOT_FOUND,
     statusCode: CONSTANTS.STATUS_CODES.NOT_FOUND,
-    details: err,
+    details: err
   });
 };
 
@@ -61,3 +61,30 @@ export const tokenExpiryResponse = (c, err = CONSTANTS.STATUS_NAMES.TOKEN_EXPIRE
   }) 
 }
 
+ export const openAPIJsonContent = <T extends ZodSchema,>(schema: T, description: string) => {
+  return {
+    content: {
+      "application/json": {
+        schema,
+      },
+    },
+    description,
+  };
+};
+
+export const openAPICreateMessageObjectSchema = (exampleMessage: string = "Hello World") => {
+  return z.object({
+    message: z.string(),
+  }).openapi({
+    example: {
+      message: exampleMessage,
+    },
+  });
+};
+
+export const jsonContentRequired = <T extends ZodSchema,>(schema: T, description: string,) => {
+  return {
+    ...openAPIJsonContent(schema, description),
+    required: true,
+  };
+};
