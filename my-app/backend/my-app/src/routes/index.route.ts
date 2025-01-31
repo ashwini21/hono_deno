@@ -6,17 +6,17 @@ const index = createRouter()
 .openapi(createRoute({
   tags:["Index"], //it defines routing tag
   method:"get",
-  path: "/",
+  path: "/api",
   responses:{
     [CONSTANTS.STATUS_CODES.OK]: openAPIJsonContent(
       openAPICreateMessageObjectSchema("Tasks API"),
-      "Tasks API Index",
+      "MercyHealth API Index",
     ),
   },
 }),
 (c)=>{
   return c.json({
-    message: "Task API",
+    message: "MercyHealth APIs",
   }, CONSTANTS.STATUS_CODES.OK);
 }
 );

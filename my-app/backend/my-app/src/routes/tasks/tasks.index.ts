@@ -5,4 +5,6 @@ import * as routes from './tasks.routes.ts'
 const router = createRouter()
 .openapi(routes.listTask, handlers.listTask)
 .openapi(routes.createTask, handlers.createTask)
+// .openapi(routes.remove, handlers.remove)
+
 export default router;

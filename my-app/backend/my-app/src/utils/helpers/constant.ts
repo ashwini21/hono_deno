@@ -25,6 +25,7 @@ export const CONSTANTS = {
     SUCCESS:'Success!'
   },
   ERROR: {
-    NOT_FOUND_ERROR_MESSAGE:'The requested URL was not found on this server.'
+    NOT_FOUND_ERROR_MESSAGE:'The requested URL was not found on this server.',
+    INVALID_REQUEST_DATA:"Invalid request data"
   }
 };

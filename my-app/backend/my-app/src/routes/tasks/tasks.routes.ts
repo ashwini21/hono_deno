@@ -5,15 +5,12 @@ import { taskInsertSchema,taskSelectSchema } from '../../database/schema/task-sc
 const tags = ["Tasks"];
 
 export const listTask = createRoute({
-    path: "/tasks",
+    path: "/list-tasks",
     method: "get",
     tags,
     responses: {
       [CONSTANTS.STATUS_CODES.OK]: openAPIJsonContent(
-        z.array(z.object({
-            name:z.string(),
-            done:z.boolean(),
-        })),
+        z.array(taskSelectSchema),
         "The list of tasks",
       ),
       [CONSTANTS.STATUS_CODES.BAD_REQUEST]: openAPIJsonContent(
@@ -24,19 +21,48 @@ export const listTask = createRoute({
   });
 
   export const createTask = createRoute({
-    path: "/create-task",
+    path: "/create-tasks",
     method: "post",
     tags,
     request: {
         body: jsonContentRequired(taskInsertSchema, "Create Task")
     },
     responses: {
-        200: openAPIJsonContent(
-            taskSelectSchema,
-            "list of tasks"
+      [CONSTANTS.STATUS_CODES.OK]: openAPIJsonContent(
+          taskSelectSchema,
+            "The created task",
         )
     }
 })
 
+// export const removeTask = createRoute({
+//   tags: ["Users"],
+//   path: "/users/{id}",
+//   request: {
+//       params: IdParamsSchema
+//   },
+//   method: "delete",
+//   responses: {
+//       204: {
+//           description: "task deleted"
+//       },
+//       422: jsonContent(
+//           createErrorSchema(IdParamsSchema),
+//           "Invalid id"
+//       ),
+//       404: jsonContent(
+//           z.object({
+//               message: z.string()
+//           }).openapi({
+//               example: {
+//                   message: "Not found"
+//               }
+//           }),
+//           "User Not Found"
+//       )
+//   }
+// })
+
   export type ListTaskRoute = typeof listTask;
-  export type CreateTask = typeof createTask
+  export type CreateTask = typeof createTask;
+  // export type RemoveRoute = typeof removeTask;

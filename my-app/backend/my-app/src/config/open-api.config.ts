@@ -16,7 +16,7 @@ export default function configuireOpenAPI(app){
     apiReference({
         theme: 'kepler',
         spec: {
-            url: '/docs',
+            url: '/doc',
         },
         layout: 'classic'
     }),
