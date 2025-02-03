@@ -36,16 +36,13 @@ export const createTask:RouteHandler<CreateTask> = async (c) => {
 export const removeTask: RouteHandler<RemoveTask> = async (c) => {
     try{
         const { id } = c.req.valid("param");
-        console.log("remove id: ",id);
-
         const result = await db.delete(tasks)
         .where(eq(tasks.id, id))
-        .returning()
-    console.log("remove result: ",result);
+        .returning();
         if (!result) {
-            return c.json(notFoundResponse, 404)
+            return c.json(notFoundResponse(CONSTANTS.ERROR.NOT_FOUND_ERROR_MESSAGE))
         }
-        return c.body(null, 204)
+        return c.body(null, CONSTANTS.STATUS_CODES.NO_CONTENT)
     }
     catch(err){
         if (err) return c.json(internalServerErrorResponse(err))
@@ -54,19 +51,6 @@ export const removeTask: RouteHandler<RemoveTask> = async (c) => {
 
 export const patchTask: RouteHandler<PatchTask> = async (c) => {
     try{
-    // const { id } = c.req.valid("param");
-    // const updates = c.req.valid("json");
-
-    // const [task] = await db.update(tasks)
-    // .set(updates)
-    // .where(eq(tasks.id, id))
-    // .returning()
-    // console.log("pathc upadate: ",task)
-    // if(!task) {
-    //     return c.json({message: "Not found"}, 404)
-    // }
-
-    // return c.json(task, 200)
     const updates = await c.req.json();
     const { id } = c.req.valid("param");
   // Update the task in the database
@@ -76,14 +60,13 @@ export const patchTask: RouteHandler<PatchTask> = async (c) => {
   .returning();
 
 if (updatedTask.length === 0) {
-  return c.json({ success: false, message: "Task not found" }, 404);
+  return c.json(notFoundResponse(CONSTANTS.ERROR.NOT_FOUND_ERROR_MESSAGE), CONSTANTS.STATUS_CODES.NOT_FOUND);
 }
-
-return c.json({ success: true, data: updatedTask[0] });
+  return c.json(successResponse(updatedTask[0]));
 }
 catch (err) {
-    console.error("Error updating task:", err);
-    return c.json({ success: false, message: "Invalid request data" }, 400);
+    // return c.json({ success: false, message: "Invalid request data" }, 400);
+    return c.json(badRequestResponse, CONSTANTS.STATUS_CODES.BAD_REQUEST);
   }}
 
 

@@ -18,14 +18,6 @@ export default function createApp(){
     const app = createRouter();
     app.use('*', pinoLogger);
     app.notFound(notFoundResponse);
-    app.onError(internalServerErrorResponse);
-    app.use('*', async (c, next) => {
-      try {
-        await next();
-      } catch (error) {
-        return badRequestResponse;
-      }
-    });
-    
+    app.onError(internalServerErrorResponse);   
     return app;
 }

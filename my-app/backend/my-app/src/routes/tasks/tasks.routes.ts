@@ -80,21 +80,21 @@ export const patchTask = createRoute({
       )
   },
   responses: {
-      200: openAPIJsonContent(
+      [CONSTANTS.STATUS_CODES.OK]: openAPIJsonContent(
           taskSelectSchema,
           "Updated task"
       ),
-      422: openAPIJsonContent(
+      [CONSTANTS.STATUS_CODES.INVALID_DATA]: openAPIJsonContent(
           createErrorSchema(idParamsSchema),
           "Invalid id"
       ),
-      404: openAPIJsonContent(
+      [CONSTANTS.STATUS_CODES.NOT_FOUND]: openAPIJsonContent(
           z.object({
               message: z.string()
           }),
           "Task Not Found"
       ),
-      500: openAPIJsonContent(
+      [CONSTANTS.STATUS_CODES.INTERNAL_SERVER_ERROR]: openAPIJsonContent(
         z.object({
           message: z.string()
         }),
