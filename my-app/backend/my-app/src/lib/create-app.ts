@@ -1,5 +1,6 @@
 import { OpenAPIHono } from 'https://esm.sh/@hono/zod-openapi@latest';
 import { pinoLogger } from '../middleware/pino-logger.ts';
+import { defaultHook } from "stoker/openapi";
 import {
   badRequestResponse,
     internalServerErrorResponse,
@@ -8,7 +9,8 @@ import {
 
 export function createRouter(){
     return new OpenAPIHono({ 
-        strict: false
+        strict: false,
+        defaultHook
      });
 }
 

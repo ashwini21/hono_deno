@@ -9,7 +9,8 @@
     "npm:drizzle-kit@~0.30.2": "0.30.3_esbuild@0.19.12",
     "npm:drizzle-orm@~0.38.4": "0.38.4_pg@8.13.1",
     "npm:drizzle-zod@0.5.1": "0.5.1_drizzle-orm@0.38.4__pg@8.13.1_zod@3.24.1_pg@8.13.1",
-    "npm:pg@^8.13.1": "8.13.1"
+    "npm:pg@^8.13.1": "8.13.1",
+    "npm:stoker@^1.4.2": "1.4.2_@asteasolutions+zod-to-openapi@7.3.0__zod@3.24.1_@hono+zod-openapi@0.18.3__hono@4.6.17__zod@3.24.1_hono@4.6.17_openapi3-ts@4.4.0"
   },
   "jsr": {
     "@hono/hono@4.6.17": {
@@ -455,6 +456,15 @@
     },
     "split2@4.2.0": {
       "integrity": "sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg=="
+    },
+    "stoker@1.4.2_@asteasolutions+zod-to-openapi@7.3.0__zod@3.24.1_@hono+zod-openapi@0.18.3__hono@4.6.17__zod@3.24.1_hono@4.6.17_openapi3-ts@4.4.0": {
+      "integrity": "sha512-zna86ZzC3fnMOIkuO+1vRMfcRw7SpC/7yafRb0u8DwDVig2pPh6POVnGB7t2A5t/rMvyr7hE7tjXTPvW8bhJKg==",
+      "dependencies": [
+        "@asteasolutions/zod-to-openapi",
+        "@hono/zod-openapi",
+        "hono",
+        "openapi3-ts"
+      ]
     },
     "undici-types@6.19.8": {
       "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
